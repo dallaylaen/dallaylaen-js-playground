@@ -1,0 +1,19 @@
+{
+  "name": "dallaylaen-js-playground",
+  "version": "1.0.0",
+  "description": "sandbox",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dallaylaen/dallaylaen-js-playground.git"
+  },
+  "author": "Konstantin S. Uvarin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dallaylaen/dallaylaen-js-playground/issues"
+  },
+  "homepage": "https://github.com/dallaylaen/dallaylaen-js-playground#readme"
+}
