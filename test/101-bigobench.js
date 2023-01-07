@@ -1,9 +1,9 @@
 const { expect } = require('chai');
-const { Perf } = require('../lib/perf.js');
+const { BigoBench } = require('../lib/bigobench');
 
-describe('Perf', () => {
+describe('BigoBench', () => {
   it('runs some code & provides summary', (done) => {
-    const perf = new Perf()
+    const perf = new BigoBench()
       .setup((n) => [...Array(n).keys()].reverse())
       .teardown((array) => {
         for (let i = 1; i < array.length; i++) if (array[i - 1] > array[i]) throw new Error('foo bared');
