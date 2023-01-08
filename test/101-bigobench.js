@@ -9,13 +9,14 @@ describe('BigoBench', () => {
         for (let i = 1; i < array.length; i++) if (array[i - 1] > array[i]) throw new Error('foo bared');
       });
 
-    const out = perf.run((ary) => ary.sort((x, y) => x - y), 10000);
+    const out = perf.run(10000, (ary) => ary.sort((x, y) => x - y));
 
+    console.log(out);
+
+    expect(out.n).to.equal(10000);
     expect(out.user).to.be.within(0, Infinity);
     expect(out.system).to.be.within(0, Infinity);
     expect(out.elapsed).to.be.within(0, Infinity);
-
-    console.log(out);
 
     done();
   });
