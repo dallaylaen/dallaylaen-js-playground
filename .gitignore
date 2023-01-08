@@ -1,5 +1,8 @@
 # Custom files
 package-lock.json
+*.out
+.*.sw[pon]
+.idea/
 
 # Logs
 logs
