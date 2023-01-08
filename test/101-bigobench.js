@@ -6,7 +6,10 @@ describe('BigoBench', () => {
     const perf = new BigoBench()
       .setup((n) => [...Array(n).keys()].reverse())
       .teardown((array) => {
-        for (let i = 1; i < array.length; i++) if (array[i - 1] > array[i]) throw new Error('foo bared');
+        for (let i = 1; i < array.length; i++) {
+          if (array[i - 1] > array[i])
+            throw new Error('foo bared');
+        }
       });
 
     const out = perf.run(10000, (ary) => ary.sort((x, y) => x - y));

@@ -1,27 +1,42 @@
 'use strict';
 
-function PQueue(better = (x, y) => x <= y) {
-  const buf = new Array();
+/**
+ * @desc Priority queue based on binary heap
+ * @param better order of items in the queue. Default is x <= y.
+ * @constructor
+ */
+function PQueue (better = (x, y) => x <= y) {
+  const buf = [];
 
-  this.push = function (item) {
-    let index = buf.length;
-    buf.push(item);
+  /**
+   * @desc Insert item(s) into queue
+   * @param list
+   * @returns {PQueue}
+   */
+  this.push = function (...list) {
+    for (const item of list) {
+      let index = buf.length;
+      buf.push(item);
 
-    // propagate leaf to root
-    while (index > 0) {
-      // calc parent node
-      const next = index - 1 >> 1;
-      // stop if invariant holds
-      if (better(buf[next], buf[index]))
-        break;
+      // propagate leaf to root
+      while (index > 0) {
+        // calc parent node
+        const next = index - 1 >> 1;
+        // stop if invariant holds
+        if (better(buf[next], buf[index]))
+          break;
 
-      // exchange & move to next index
-      [buf[next], buf[index]] = [buf[index], buf[next]];
-      index = next;
+        // exchange & move to next index
+        [buf[next], buf[index]] = [buf[index], buf[next]];
+        index = next;
+      }
     }
     return this;
   }
 
+  /**
+   * @returns {any} Next item to be fetched as per the order
+   */
   this.shift = function () {
     if (buf.length <= 1)
       return buf.pop();
@@ -51,11 +66,11 @@ function PQueue(better = (x, y) => x <= y) {
     return best;
   }
 
-  this.peek = function() {
+  this.peek = function () {
     return buf[0];
   }
 
-  this.length = function() {
+  this.length = function () {
     return buf.length;
   }
 }
