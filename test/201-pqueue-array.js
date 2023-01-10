@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { PQueue } = require('../pqueue-array');
+const { PQueue } = require('../queue/pqueue-array');
 
 describe('PQueue', () => {
   it('can sort stuff', (done) => {
