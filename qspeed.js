@@ -8,15 +8,15 @@ const bench = new BigoBench()
     return [...new Array(n).keys()].sort( () => Math.random() - 0.5 );
   });
 
-const probe = list => {
+const probe = (list, cb) => {
   const pq = new PQueue();
   for (const i of list)
     pq.push(i);
   const out = [];
   while (pq.length())
     out.push( pq.shift() );
-  return out;
+  cb(out);
 }
 
-for (const n of [10 ** 6])
-  console.log(bench.run( n, probe ));
+for (const n of [10 ** 4, 10 ** 5 , 10 ** 6])
+  bench.run( n, probe ).then(console.log);
