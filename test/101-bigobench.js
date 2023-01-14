@@ -12,15 +12,19 @@ describe('BigoBench', () => {
         }
       });
 
-    const out = perf.run(10000, (ary) => ary.sort((x, y) => x - y));
+    const prom = perf.run(10000, (ary, cb) => cb(ary.sort((x, y) => x - y)) );
 
-    console.log(out);
+    console.log(prom);
 
-    expect(out.n).to.equal(10000);
-    expect(out.user).to.be.within(0, Infinity);
-    expect(out.system).to.be.within(0, Infinity);
-    expect(out.elapsed).to.be.within(0, Infinity);
+    prom.then(out => {
+      console.log(out);
 
-    done();
+      expect(out.n).to.equal(10000);
+      expect(out.user).to.be.within(0, Infinity);
+      expect(out.system).to.be.within(0, Infinity);
+      expect(out.elapsed).to.be.within(0, Infinity);
+
+      done();
+    });
   });
 });
