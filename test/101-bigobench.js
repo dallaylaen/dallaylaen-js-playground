@@ -4,17 +4,16 @@ const { BigoBench } = require('../lib/bigobench');
 describe('BigoBench', () => {
   it('runs some code & provides summary', (done) => {
     const perf = new BigoBench()
-      .setup((n) => [...Array(n).keys()].reverse())
-      .teardown((array) => {
+      .setup((n, cb) => cb([...Array(n).keys()].reverse()))
+      .teardown((array, cb) => {
         for (let i = 1; i < array.length; i++) {
           if (array[i - 1] > array[i])
-            throw new Error('foo bared');
+            cb('array out of order' + array.join(', '));
         }
+        cb();
       });
 
     const prom = perf.run(10000, (ary, cb) => cb(ary.sort((x, y) => x - y)) );
-
-    console.log(prom);
 
     prom.then(out => {
       console.log(out);

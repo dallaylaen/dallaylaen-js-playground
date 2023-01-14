@@ -4,8 +4,8 @@ const { BigoBench } = require( './lib/bigobench' );
 const { PQueue } = require( './queue/pqueue-closure' );
 
 const bench = new BigoBench()
-  .setup( n => {
-    return [...new Array(n).keys()].sort( () => Math.random() - 0.5 );
+  .setup( (n, cb) => {
+    cb( [...new Array(n).keys()].sort( () => Math.random() - 0.5 ) );
   });
 
 const probe = (list, cb) => {
