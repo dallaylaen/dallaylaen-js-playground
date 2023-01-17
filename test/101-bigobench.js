@@ -26,4 +26,8 @@ describe('BigoBench', () => {
       done();
     });
   });
+
+  it ('has sane default setup & teardown', done => {
+    new BigoBench().run(1, (n, cb) => cb(n) ).then(() => done());
+  })
 });
