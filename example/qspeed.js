@@ -1,7 +1,7 @@
 'use strict';
 
-const { BigoBench } = require( './lib/bigobench' );
-const { PQueue } = require( './queue/pqueue-closure' );
+const { BigoBench } = require( '../lib/bigobench' );
+const { PQueue } = require( '../queue/pqueue-closure' );
 
 const bench = new BigoBench()
   .setup( (n, cb) => {
