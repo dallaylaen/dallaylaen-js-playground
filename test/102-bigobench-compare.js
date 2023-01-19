@@ -7,7 +7,7 @@ describe( 'BigoBench.compare', () => {
   it( 'produces some results', done => {
     const bench = new BigoBench();
 
-    bench.compare({ arg: [13, 21, 34, 55]}, {
+    bench.compare({ argList: [13, 21, 34, 55]}, {
       fwd: (n, cb) => { let sum = 0; for (let i = 0; i < n; i++) sum += i; cb(sum) },
       bwd: (n, cb) => { let sum = 0; for (let i = n; i--> 0; ) sum += i; cb(sum) },
     }).then(cmpData => {

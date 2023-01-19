@@ -22,6 +22,7 @@ describe('BigoBench', () => {
       expect(out.user).to.be.within(0, Infinity);
       expect(out.system).to.be.within(0, Infinity);
       expect(out.elapsed).to.be.within(0, Infinity);
+      // expect(out.cpu).to.be.within(0, Infinity);
 
       done();
     });
