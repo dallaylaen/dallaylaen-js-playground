@@ -25,5 +25,8 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1"
+  },
+  "dependencies": {
+    "refutable": "^1.0.4"
   }
 }
