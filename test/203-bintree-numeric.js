@@ -1,6 +1,7 @@
 'use strict';
 
 const { expect } = require( 'chai' );
+const { Report } = require( 'refutable' );
 const { BinTree, TreeNode } = require('../btree/bintree');
 
 describe( 'BinTree', () => {
@@ -39,7 +40,10 @@ describe( 'TreeNode', () => {
     const bt = new BinTree((x,y) => x-y);
     for (let i = 0; i < 100; i++)
       bt.add(i);
-    console.log(bt);
-    done();
+    console.log(bt.debug());
+    const report = bt.selfCheck();
+    // console.log(''+report);
+    // expect( report.getPass() ).to.equal(true);
+    done(report.getPass() ? '' : ''+report);
   });
 })
