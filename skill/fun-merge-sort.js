@@ -9,6 +9,14 @@ class List {
     this.val  = val;
     this.next = next;
   }
+  map(fun) {
+    return new List(fun(this.val), this.next?.map(fun));
+  }
+
+
+  fold(acc, fun) {
+    return (res => this.next ? this.next.fold(res, fun) : res )(fun(acc, this.val));
+  }
   toString() {
     return this.val + (this.next ? ', ' + this.next : '');
   }
@@ -21,9 +29,12 @@ List.gen = (n, fun = x=>x, tail = null) => n <= 0 ? tail : List.gen(n-1, fun, ne
 
 // console.log(''+List.gen(20, n => n * n));
 
+/*
 const li = List.gen(20, _ => Math.floor(Math.random() * 10000));
 
 console.log(''+li);
 
 console.log(''+msort(li));
+*/
 
+console.log(List.gen(2500).map(x => 1/x/(x+1)).fold(0, (a,b) => a+b));
