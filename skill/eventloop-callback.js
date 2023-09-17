@@ -11,7 +11,7 @@ setImmediate(() => {
   redo('immediate', iter, 0, setImmediate);
   redo('timeout', iter, 0, f => setTimeout(f, 0));
   redo('nextTick', iter, 0, process.nextTick);
-  redo('promise', iter, 0, f => new Promise(f));
+  redo('promise', iter, 0, f => Promise.resolve(0).then(f));
   redo('plain js', iter, 0, f => f());
 });
 
