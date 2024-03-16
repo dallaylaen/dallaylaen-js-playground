@@ -1,5 +1,13 @@
 'use strict';
 
+/**
+ * @desc Create an anchored regular expression that matches `str`
+ *         with at most `fuzz` replacement, insertions, deletions,
+ *         or swappings of adjacent characters
+ * @param str
+ * @param fuzz
+ * @return {RegExp}
+ */
 function fuzzy (str, fuzz) {
   return new RegExp('^(' + fuzzy_rec(str, fuzz) + ')$');
 }
