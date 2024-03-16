@@ -10,11 +10,11 @@ describe('fuzzy search', () => {
     // 0
     ["fuzzy"],
     // 1
-    ["fzzy", "fuzzi", "_fuzzy"],
+    ["fzzy", "fuzzi", "_fuzzy", "fzuzy"],
     // 2
-    ["fzuzy", "_fuzzy_", ],
+    ["fzuzi", "_fuzzy_", ],
     // 3
-    [],
+    ["uf_yz"],
     // 4
     ["f_u_z_z_y", "f", "y"],
     // 5
