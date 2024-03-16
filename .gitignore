@@ -3,6 +3,7 @@ package-lock.json
 *.out
 .*.sw[pon]
 .idea/
+ts/*.js
 
 # Logs
 logs
