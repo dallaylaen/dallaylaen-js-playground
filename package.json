@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/dallaylaen/dallaylaen-js-playground#readme",
   "devDependencies": {
+    "@types/node": "^18.16.0",
     "chai": "^4.3.7",
     "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -28,6 +29,7 @@
   },
   "dependencies": {
     "eslint-plugin-n": "^15.6.1",
-    "refutable": "^1.0.6"
+    "refutable": "^1.0.6",
+    "stats-logscale": "^1.0.9"
   }
 }
