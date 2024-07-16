@@ -95,7 +95,9 @@ class Special extends Value {
 
 class Empty extends Ast {
   combine(args) {
-    return args.shift().combine(args);
+    if (args instanceof Ast)
+      args = [args];
+    return args.length ? args.shift().combine(args) : this;
   }
   toString () {
     return "<empty>";
@@ -105,7 +107,7 @@ class Empty extends Ast {
 const known = {
   I: new Special("I", 1, x => x),
   K: new Special("K", 2, (x, _) => x),
-  S: new Special("S", 3, (x, y, z) => x.combine([z]).combine([y.combine([z])])),
+  S: new Special("S", 3, (x, y, z) => x.combine(z).combine(y.combine(z))),
 }
 
 function ident (token) {
