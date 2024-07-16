@@ -4,9 +4,7 @@
 
 class Ast {
   constructor() {};
-  combine(args) {
-    if (args instanceof Ast)
-      args = [args];
+  combine(...args) {
     return args.length > 0 ? new Call(this, args) : this;
   }
   eval() {return null};
@@ -27,9 +25,7 @@ class Call extends Ast {
     this.args = args;
   }
 
-  combine(args) {
-    if (args instanceof Ast)
-      args = [args];
+  combine(...args) {
     if (args.length === 0)
       return this;
     return new Call(this.fun, [...this.args, ...args]);
@@ -44,6 +40,7 @@ class Call extends Ast {
       // console.log("change in function: "+this.fun + " => " + f);
     }
 
+    // console.log("this.args = ", this.args);
     const args = [];
     for (let x of this.args) {
       const next = x.eval();
@@ -55,7 +52,7 @@ class Call extends Ast {
     }
 
     if (change)
-      return (f ?? this.fun).combine(args);
+      return (f ?? this.fun).combine(...args);
 
     // if nothing has changed, but there's known combinator, reduce it
     if (this.fun instanceof Special && this.args.length >= this.fun.arity) {
@@ -63,7 +60,7 @@ class Call extends Ast {
       const enough = args.splice(0, this.fun.arity);
       const result = this.fun.impl(...enough)
       // console.log("eval: apply "+this.fun+" to "+enough.join(", ")+" => "+result);
-      return result.combine(args);
+      return result.combine(...args);
     }
 
     // no change whatsoever
@@ -94,10 +91,8 @@ class Special extends Value {
 }
 
 class Empty extends Ast {
-  combine(args) {
-    if (args instanceof Ast)
-      args = [args];
-    return args.length ? args.shift().combine(args) : this;
+  combine(...args) {
+    return args.length ? args.shift().combine(...args) : this;
   }
   toString () {
     return "<empty>";
@@ -128,12 +123,12 @@ function parse (str) {
     } else if( c === ')') {
       const x = stack.pop();
       const f = stack.pop();
-      stack.push(f.combine([x]));
+      stack.push(f.combine(x));
     } else {
       const f = stack.pop();
       const x = ident(c);
       // console.log("combine", f, x)
-      stack.push(f.combine([x]));
+      stack.push(f.combine(x));
     }
   }
 
