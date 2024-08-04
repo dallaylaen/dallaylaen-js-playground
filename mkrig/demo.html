@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Work out stuff before putting in other htmls</title>
+    <link rel="stylesheet" href="misc/main.css">
+    <script src="js/mkrig.js"></script>
+</head>
+<body>
+
+<div id="main">
+
+</div>
+
+
+<div hidden>
+    <script type="text/html">
+        <div>
+            <div><b id="title">Lorem ipsum</b></div>
+            <div class="content">
+                count: <span id="count">???</span>
+            </div>
+            <button id="inc">inc</button>
+            <button id="dec">dec</button>
+        </div>
+    </script>
+    <script>
+        const showcount = mkrig( function (title, count=0) {
+            this.view.title.write(title);
+            this.mkprop('count', n => {
+                if (typeof n !== 'number')
+                    throw new Error("expected a number");
+                this.view.count.write(n);
+            });
+            this.count = count;
+            this.view.inc.onclick = () => { this.count++};
+            this.view.dec.onclick = () => { this.count--};
+        });
+        const total = showcount('Total nodes').attachTo('main');
+    </script>
+
+        <div style="border: solid blue 1px; padding: 1px;">
+            <div class="con-header"><span id="title"></span><button style="float: right" id="del">del</button></div>
+            <div><input id="name"><button id="mk">create</button></div>
+            <div id="content" style="padding-left: 2em;"></div>
+        </div>
+
+    <script>
+        const box = mkrig(function(title) {
+            total.count++;
+            this.view.title.write(title);
+            this.children = [];
+            this.alive = true;
+            this.view.mk.onclick = () => this.children.push(box(this.view.name.value).attachTo(this.view.content));
+            this.demolish = () => {
+                if (!this.alive)
+                    return;
+                this.alive = false;
+                total.count--;
+                for (const child of this.children)
+                    child.demolish();
+                this.root.remove();
+                this.children = [];
+            };
+            this.view.del.onclick = () => this.demolish();
+        });
+
+        box("root node").attachTo('main');
+    </script>
+</div>
+
+<script>
+    // showcount( "hello world", 42).attachTo('main');
+
+</script>
+
+</body>
+</html>
