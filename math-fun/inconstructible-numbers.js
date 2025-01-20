@@ -1,3 +1,13 @@
+/**
+ *  Frobenius problem aka Coin problem:
+ *  https://en.wikipedia.org/wiki/Coin_problem
+ *
+ *  Given a set of setwise-coprime natural numbers,
+ *  find the largest number that cannot be represented
+ *  as a sum of the numbers in set with repetitions.
+ *  It can be shown that such number always exists.
+ */
+
 const cases = [
     [2, 3],
     [2, 7],
@@ -21,6 +31,8 @@ const cases = [
     [33, 35],
     [21, 34],
     [34, 55],
+    [6006, 6015, 6010],
+    [2102, 2103, 2105, 2107],
 ];
 
 for (const seed of cases) {
